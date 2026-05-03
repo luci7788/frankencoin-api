@@ -84,10 +84,10 @@ export class TelegramService {
 
 		const groups = await this.prisma.safeExecute(() => this.prisma.telegramGroup.findMany());
 
-		if (groups && groups.length > 0) {
-			this.telegramGroupState.groups = groups.map((g) => g.chatId);
-			this.telegramGroupState.subscription = Object.fromEntries(groups.map((g) => [g.chatId, g.subscriptions as any]));
-			this.logger.log(`Telegram group state restored (${groups.length} groups)`);
+if (groups && (groups as any[]).length > 0) {
+this.telegramGroupState.groups = (groups as any[]).map((g) => g.chatId);
+this.telegramGroupState.subscription = Object.fromEntries((groups as any[]).map((g) => [g.chatId, g.subscriptions as any]));
+this.logger.log(`Telegram group state restored (${(groups as any[]).length} groups)`);
 		} else {
 			this.logger.log('No telegram groups found, starting fresh');
 		}
