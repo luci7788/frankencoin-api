@@ -7,9 +7,9 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 // Verify environment
-if (process.env.ALCHEMY_RPC_KEY === undefined) throw new Error('ALCHEMY_RPC_KEY not available');
-if (process.env.COINGECKO_API_KEY === undefined) throw new Error('COINGECKO_API_KEY not available');
-if (process.env.THE_GRAPH_KEY === undefined) throw new Error('THE_GRAPH_KEY not available');
+// if (process.env.ALCHEMY_RPC_KEY === undefined) throw new Error('ALCHEMY_RPC_KEY not available');
+// if (process.env.COINGECKO_API_KEY === undefined) throw new Error('COINGECKO_API_KEY not available');
+// if (process.env.THE_GRAPH_KEY === undefined) throw new Error('THE_GRAPH_KEY not available');
 
 // Config type
 export type ConfigType = {
