@@ -6,11 +6,6 @@ import { arbitrum, avalanche, base, gnosis, mainnet, optimism, polygon, sonic } 
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-// Verify environment
-// if (process.env.ALCHEMY_RPC_KEY === undefined) throw new Error('ALCHEMY_RPC_KEY not available');
-// if (process.env.COINGECKO_API_KEY === undefined) throw new Error('COINGECKO_API_KEY not available');
-// if (process.env.THE_GRAPH_KEY === undefined) throw new Error('THE_GRAPH_KEY not available');
-
 // Config type
 export type ConfigType = {
 	app: string;
@@ -28,9 +23,9 @@ export const CONFIG: ConfigType = {
 	app: process.env.CONFIG_APP_URL || 'https://app.frankencoin.com',
 	indexer: process.env.CONFIG_INDEXER_URL || 'https://ponder.frankencoin.com',
 	backupIndexer: process.env.CONFIG_BACKUP_INDEXER_URL || null,
-	coingeckoApiKey: process.env.COINGECKO_API_KEY,
-	alchemyRpcKey: process.env.ALCHEMY_RPC_KEY,
-	theGraphKey: process.env.THE_GRAPH_KEY,
+	coingeckoApiKey: process.env.COINGECKO_API_KEY || '',
+	alchemyRpcKey: process.env.ALCHEMY_RPC_KEY || '',
+	theGraphKey: process.env.THE_GRAPH_KEY || '',
 	supportedChainIds: SupportedChainIds,
 	databaseEnabled: process.env.DISABLE_DATABASE !== 'true',
 };
@@ -53,89 +48,66 @@ export const PONDER_CLIENT_BACKUP = CONFIG.backupIndexer
 		})
 	: null;
 
+// Free public RPC URLs
+const RPC_MAINNET   = process.env.RPC_URL_MAINNET  || 'https://rpc.ankr.com/eth';
+const RPC_POLYGON   = process.env.RPC_URL_POLYGON  || 'https://rpc.ankr.com/polygon';
+const RPC_OPTIMISM  = process.env.RPC_URL_OPTIMISM || 'https://rpc.ankr.com/optimism';
+const RPC_ARBITRUM  = process.env.RPC_URL_ARBITRUM || 'https://rpc.ankr.com/arbitrum';
+const RPC_BASE      = process.env.RPC_URL_BASE     || 'https://rpc.ankr.com/base';
+const RPC_AVALANCHE = process.env.RPC_URL_AVALANCHE|| 'https://rpc.ankr.com/avalanche';
+const RPC_GNOSIS    = process.env.RPC_URL_GNOSIS   || 'https://rpc.ankr.com/gnosis';
+const RPC_SONIC     = process.env.RPC_URL_SONIC    || 'https://rpc.soniclabs.com';
+
 // VIEM CONFIG BY CHAINS
 export const ViemConfigMainnet = createPublicClient({
 	chain: mainnet,
-	transport: http(`https://eth-mainnet.g.alchemy.com/v2/${CONFIG.alchemyRpcKey}`),
-	batch: {
-		multicall: {
-			wait: 200,
-		},
-	},
+	transport: http(RPC_MAINNET),
+	batch: { multicall: { wait: 200 } },
 });
 
 export const ViemConfigPolygon = createPublicClient({
 	chain: polygon,
-	transport: http(`https://polygon-mainnet.g.alchemy.com/v2/${CONFIG.alchemyRpcKey}`),
-	batch: {
-		multicall: {
-			wait: 200,
-		},
-	},
+	transport: http(RPC_POLYGON),
+	batch: { multicall: { wait: 200 } },
 });
 
 export const ViemConfigOptimism = createPublicClient({
 	chain: optimism,
-	transport: http(`https://opt-mainnet.g.alchemy.com/v2/${CONFIG.alchemyRpcKey}`),
-	batch: {
-		multicall: {
-			wait: 200,
-		},
-	},
+	transport: http(RPC_OPTIMISM),
+	batch: { multicall: { wait: 200 } },
 });
 
 export const ViemConfigArbitrum = createPublicClient({
 	chain: arbitrum,
-	transport: http(`https://arb-mainnet.g.alchemy.com/v2/${CONFIG.alchemyRpcKey}`),
-	batch: {
-		multicall: {
-			wait: 200,
-		},
-	},
+	transport: http(RPC_ARBITRUM),
+	batch: { multicall: { wait: 200 } },
 });
 
 export const ViemConfigBase = createPublicClient({
 	chain: base,
-	transport: http(`https://base-mainnet.g.alchemy.com/v2/${CONFIG.alchemyRpcKey}`),
-	batch: {
-		multicall: {
-			wait: 200,
-		},
-	},
+	transport: http(RPC_BASE),
+	batch: { multicall: { wait: 200 } },
 });
 
 export const ViemConfigAvalanche = createPublicClient({
 	chain: avalanche,
-	transport: http(`https://avax-mainnet.g.alchemy.com/v2/${CONFIG.alchemyRpcKey}`),
-	batch: {
-		multicall: {
-			wait: 200,
-		},
-	},
+	transport: http(RPC_AVALANCHE),
+	batch: { multicall: { wait: 200 } },
 });
 
 export const ViemConfigGnosis = createPublicClient({
 	chain: gnosis,
-	transport: http(`https://gnosis-mainnet.g.alchemy.com/v2/${CONFIG.alchemyRpcKey}`),
-	batch: {
-		multicall: {
-			wait: 200,
-		},
-	},
+	transport: http(RPC_GNOSIS),
+	batch: { multicall: { wait: 200 } },
 });
 
 export const ViemConfigSonic = createPublicClient({
 	chain: sonic,
-	transport: http(`https://sonic-mainnet.g.alchemy.com/v2/${CONFIG.alchemyRpcKey}`),
-	batch: {
-		multicall: {
-			wait: 200,
-		},
-	},
+	transport: http(RPC_SONIC),
+	batch: { multicall: { wait: 200 } },
 });
 
 // VIEM CONFIG MERGED
-// @dev: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
 export const VIEM_CONFIG: Record<number, PublicClient> = {
 	[mainnet.id]: ViemConfigMainnet as PublicClient,
 	[polygon.id]: ViemConfigPolygon as PublicClient,
