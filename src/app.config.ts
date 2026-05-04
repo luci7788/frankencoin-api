@@ -49,13 +49,13 @@ export const PONDER_CLIENT_BACKUP = CONFIG.backupIndexer
 	: null;
 
 // Free public RPC URLs
-const RPC_MAINNET   = process.env.RPC_URL_MAINNET  || 'https://rpc.ankr.com/eth';
-const RPC_POLYGON   = process.env.RPC_URL_POLYGON  || 'https://rpc.ankr.com/polygon';
-const RPC_OPTIMISM  = process.env.RPC_URL_OPTIMISM || 'https://rpc.ankr.com/optimism';
-const RPC_ARBITRUM  = process.env.RPC_URL_ARBITRUM || 'https://rpc.ankr.com/arbitrum';
-const RPC_BASE      = process.env.RPC_URL_BASE     || 'https://rpc.ankr.com/base';
-const RPC_AVALANCHE = process.env.RPC_URL_AVALANCHE|| 'https://rpc.ankr.com/avalanche';
-const RPC_GNOSIS    = process.env.RPC_URL_GNOSIS   || 'https://rpc.ankr.com/gnosis';
+const RPC_MAINNET   = process.env.RPC_URL_MAINNET  || 'https://cloudflare-eth.com';
+const RPC_POLYGON   = process.env.RPC_URL_POLYGON  || 'https://polygon.publicnode.com';
+const RPC_OPTIMISM  = process.env.RPC_URL_OPTIMISM || 'https://optimism.publicnode.com';
+const RPC_ARBITRUM  = process.env.RPC_URL_ARBITRUM || 'https://arbitrum-one.publicnode.com';
+const RPC_BASE      = process.env.RPC_URL_BASE     || 'https://base.publicnode.com';
+const RPC_AVALANCHE = process.env.RPC_URL_AVALANCHE|| 'https://avalanche-c-chain.publicnode.com';
+const RPC_GNOSIS    = process.env.RPC_URL_GNOSIS   || 'https://gnosis.publicnode.com';
 const RPC_SONIC     = process.env.RPC_URL_SONIC    || 'https://rpc.soniclabs.com';
 
 // VIEM CONFIG BY CHAINS
